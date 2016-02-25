@@ -149,6 +149,7 @@ int main(int argc, const char * argv[])
         exit (4);
     }
     const char * version_string = argv[4];
+    int line_num = 0;
     
     
     // Read Localization TSV
@@ -160,7 +161,7 @@ int main(int argc, const char * argv[])
 
     while (fgets(buf, sizeof(buf) - 1, fp_t))
     {
-        BOOL isfound = NO;
+        line_num++;
         strcpy(org, buf);
         
         if (buf[0] != '#')
@@ -177,15 +178,25 @@ int main(int argc, const char * argv[])
             {
                 TranslatedTSV t = getTranslationData(guf);
                 
+                char * crlf = strchr(t.translation, CRLF);
+                if (! crlf)
+                {
+                    crlf = strchr(t.note, CRLF);
+                }
+                if (crlf)
+                {
+                    printf("Illegal translation with CRLF: %d", line_num);
+                    exit (6);
+                }
+                
                 if (! strcmp(l.ref_name, t.id) && ! strcmp(l.ref_key, t.index) && ! strcmp(l.index, t.key))
                 {
                     sprintf(out, "%s\t%s\t%s\t%s\t%s\t%s\n", l.ref_name, l.ref_key, l.index, l.value, t.translation, t.note);
-                    isfound = OK;
                     fputs(out, fp_w);
                     break;
                 }
             }
-            if ((l.value[0] != '[' || l.value[1] != '[') && ! isfound)
+            if (feof(fp_s))
             {
                 sprintf(out, "%s\t%s\t%s\t%s\t\t%s にて追加\n", l.ref_name, l.ref_key, l.index, l.value, version_string);
                 fputs(out, fp_w);
