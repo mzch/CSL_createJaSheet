@@ -84,6 +84,7 @@ TranslatedTSV getTranslationData(char * buf)
         return t;
     *p = '\0';
     t.index = buf;
+
     p++;
     buf = p;
     p = strchr(buf, TAB);
