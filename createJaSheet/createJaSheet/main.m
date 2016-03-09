@@ -156,9 +156,11 @@ int main(int argc, const char * argv[])
     // Read Localization TSV
     char buf[BUFFER_SIZE];
     char org[BUFFER_SIZE];
-    char out[BUFFER_SIZE];
     
     fgets(buf, sizeof(buf) - 1, fp_t);      // 先頭行読み捨て
+    fgets(buf, sizeof(buf) - 1, fp_s);      // 先頭行書き込み
+    fputs(buf, fp_w);
+    
 
     while (fgets(buf, sizeof(buf) - 1, fp_t))
     {
@@ -192,15 +194,13 @@ int main(int argc, const char * argv[])
                 
                 if (! strcmp(l.ref_name, t.id) && ! strcmp(l.ref_key, t.index) && ! strcmp(l.index, t.key))
                 {
-                    sprintf(out, "%s\t%s\t%s\t%s\t%s\t%s\n", l.ref_name, l.ref_key, l.index, l.value, t.translation, t.note);
-                    fputs(out, fp_w);
+                    fprintf(fp_w, "%s\t%s\t%s\t%s\t%s\t%s\n", l.ref_name, l.ref_key, l.index, l.value, t.translation, t.note);
                     break;
                 }
             }
             if (feof(fp_s))
             {
-                sprintf(out, "%s\t%s\t%s\t%s\t\t%s にて追加\n", l.ref_name, l.ref_key, l.index, l.value, version_string);
-                fputs(out, fp_w);
+                fprintf(fp_w, "%s\t%s\t%s\t%s\t\t%s にて追加\n", l.ref_name, l.ref_key, l.index, l.value, version_string);
             }
             rewind(fp_s);
         }
