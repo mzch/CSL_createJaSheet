@@ -164,7 +164,6 @@ int main(int argc, const char * argv[])
     // Read Localization TSV
     char buf[BUFFER_SIZE];
     char org[BUFFER_SIZE];
-    char line[BUFFER_SIZE];
     
     fgets(buf, sizeof(buf) - 1, fp_t);      // 先頭行読み捨て
     fgets(buf, sizeof(buf) - 1, fp_s);      // 先頭行書き込み
@@ -174,7 +173,6 @@ int main(int argc, const char * argv[])
     while (fgets(buf, sizeof(buf) - 1, fp_t))
     {
         line_num++;
-        sprintf(line, "%d\t", line_num);
         strcpy(org, buf);
         
         if (buf[0] != '#')
@@ -212,7 +210,7 @@ int main(int argc, const char * argv[])
             if (feof(fp_s))
             {
                 line_count++;
-                fprintf(fp_w, "%d\t%s\t%s\t%s\t%s\t\t%s にて追加\n", l.ref_name, l.ref_key, l.index, l.value, version_string);
+                fprintf(fp_w, "%d\t%s\t%s\t%s\t%s\t\t%s にて追加\n", line_count, l.ref_name, l.ref_key, l.index, l.value, version_string);
             }
             rewind(fp_s);
         }
