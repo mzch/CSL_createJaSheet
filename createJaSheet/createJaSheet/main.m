@@ -69,9 +69,17 @@ TranslatedTSV getTranslationData(char * buf)
 {
     TranslatedTSV t;
     
-    t.index = t.value = t.id = t.key = t.translation = t.note = "";
+    t.line_num = t.index = t.value = t.id = t.key = t.translation = t.note = "";
     
     char *p = strchr(buf, TAB);
+    if (! p)
+        return t;
+    *p = '\0';
+    t.line_num = buf;
+    
+    p++;
+    buf = p;
+    p = strchr(buf, TAB);
     if (! p)
         return t;
     *p = '\0';
@@ -151,11 +159,12 @@ int main(int argc, const char * argv[])
     }
     const char * version_string = argv[4];
     int line_num = 0;
-    
+    int line_count = 0;
     
     // Read Localization TSV
     char buf[BUFFER_SIZE];
     char org[BUFFER_SIZE];
+    char line[BUFFER_SIZE];
     
     fgets(buf, sizeof(buf) - 1, fp_t);      // 先頭行読み捨て
     fgets(buf, sizeof(buf) - 1, fp_s);      // 先頭行書き込み
@@ -165,6 +174,7 @@ int main(int argc, const char * argv[])
     while (fgets(buf, sizeof(buf) - 1, fp_t))
     {
         line_num++;
+        sprintf(line, "%d\t", line_num);
         strcpy(org, buf);
         
         if (buf[0] != '#')
@@ -194,13 +204,15 @@ int main(int argc, const char * argv[])
                 
                 if (! strcmp(l.ref_name, t.id) && ! strcmp(l.ref_key, t.index) && ! strcmp(l.index, t.key))
                 {
-                    fprintf(fp_w, "%s\t%s\t%s\t%s\t%s\t%s\n", l.ref_name, l.ref_key, l.index, l.value, t.translation, t.note);
+                    line_count++;
+                    fprintf(fp_w, "%d\t%s\t%s\t%s\t%s\t%s\t%s\n", line_count, l.ref_name, l.ref_key, l.index, l.value, t.translation, t.note);
                     break;
                 }
             }
             if (feof(fp_s))
             {
-                fprintf(fp_w, "%s\t%s\t%s\t%s\t\t%s にて追加\n", l.ref_name, l.ref_key, l.index, l.value, version_string);
+                line_count++;
+                fprintf(fp_w, "%d\t%s\t%s\t%s\t%s\t\t%s にて追加\n", l.ref_name, l.ref_key, l.index, l.value, version_string);
             }
             rewind(fp_s);
         }

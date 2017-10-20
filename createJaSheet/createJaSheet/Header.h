@@ -20,9 +20,10 @@ typedef struct {
 } LocaleTSV;
 
 typedef struct {
-    char * id;         //
-    char * index;      //
-    char * key;        //
+    char * line_num;    // Line Number
+    char * id;          //
+    char * index;       //
+    char * key;         //
     char * value;
     char * translation;
     char * note;
