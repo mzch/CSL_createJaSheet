@@ -23,6 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A429C93D2299AFA40079D079 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		A478D18D221A509C0059E1E3 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		A47CCE291C7E844000902D5C /* createJaSheet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = createJaSheet; sourceTree = BUILT_PRODUCTS_DIR; };
 		A47CCE331C7E846000902D5C /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
@@ -58,6 +59,7 @@
 		A47CCE2B1C7E844000902D5C /* createJaSheet */ = {
 			isa = PBXGroup;
 			children = (
+				A429C93D2299AFA40079D079 /* CMakeLists.txt */,
 				A478D18D221A509C0059E1E3 /* main.c */,
 				A47CCE331C7E846000902D5C /* Header.h */,
 			);
@@ -103,6 +105,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = A47CCE201C7E844000902D5C;
