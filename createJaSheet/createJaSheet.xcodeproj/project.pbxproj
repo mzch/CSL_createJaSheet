@@ -97,6 +97,8 @@
 				TargetAttributes = {
 					A47CCE281C7E844000902D5C = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 76NT4JB728;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -212,16 +214,26 @@
 		A47CCE311C7E844000902D5C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 76NT4JB728;
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = me.matsumoto.koichi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
 		A47CCE321C7E844000902D5C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 76NT4JB728;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = me.matsumoto.koichi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
